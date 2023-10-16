@@ -1,0 +1,11 @@
+C:\Users\sotom\OneDrive\Escritorio\Ejercicios C#\Parciales\Soto.Magali.Parcial1\Biblioteca\bin\Debug\net6.0\Biblioteca.deps.json
+C:\Users\sotom\OneDrive\Escritorio\Ejercicios C#\Parciales\Soto.Magali.Parcial1\Biblioteca\bin\Debug\net6.0\Biblioteca.dll
+C:\Users\sotom\OneDrive\Escritorio\Ejercicios C#\Parciales\Soto.Magali.Parcial1\Biblioteca\bin\Debug\net6.0\Biblioteca.pdb
+C:\Users\sotom\OneDrive\Escritorio\Ejercicios C#\Parciales\Soto.Magali.Parcial1\Biblioteca\obj\Debug\net6.0\Biblioteca.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\sotom\OneDrive\Escritorio\Ejercicios C#\Parciales\Soto.Magali.Parcial1\Biblioteca\obj\Debug\net6.0\Biblioteca.AssemblyInfoInputs.cache
+C:\Users\sotom\OneDrive\Escritorio\Ejercicios C#\Parciales\Soto.Magali.Parcial1\Biblioteca\obj\Debug\net6.0\Biblioteca.AssemblyInfo.cs
+C:\Users\sotom\OneDrive\Escritorio\Ejercicios C#\Parciales\Soto.Magali.Parcial1\Biblioteca\obj\Debug\net6.0\Biblioteca.csproj.CoreCompileInputs.cache
+C:\Users\sotom\OneDrive\Escritorio\Ejercicios C#\Parciales\Soto.Magali.Parcial1\Biblioteca\obj\Debug\net6.0\Biblioteca.dll
+C:\Users\sotom\OneDrive\Escritorio\Ejercicios C#\Parciales\Soto.Magali.Parcial1\Biblioteca\obj\Debug\net6.0\refint\Biblioteca.dll
+C:\Users\sotom\OneDrive\Escritorio\Ejercicios C#\Parciales\Soto.Magali.Parcial1\Biblioteca\obj\Debug\net6.0\Biblioteca.pdb
+C:\Users\sotom\OneDrive\Escritorio\Ejercicios C#\Parciales\Soto.Magali.Parcial1\Biblioteca\obj\Debug\net6.0\ref\Biblioteca.dll

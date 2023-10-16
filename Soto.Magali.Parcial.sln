@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34024.191
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Soto.Magali.Parcial", "Soto.Magali.Parcial1\Soto.Magali.Parcial.csproj", "{001A3133-75F7-444E-96F6-3739A8C24BBE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Biblioteca", "Biblioteca\Biblioteca.csproj", "{558D99FE-18B8-4B7B-8AE9-557E6E2E7062}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{001A3133-75F7-444E-96F6-3739A8C24BBE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{001A3133-75F7-444E-96F6-3739A8C24BBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{001A3133-75F7-444E-96F6-3739A8C24BBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{001A3133-75F7-444E-96F6-3739A8C24BBE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{558D99FE-18B8-4B7B-8AE9-557E6E2E7062}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{558D99FE-18B8-4B7B-8AE9-557E6E2E7062}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{558D99FE-18B8-4B7B-8AE9-557E6E2E7062}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{558D99FE-18B8-4B7B-8AE9-557E6E2E7062}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B72C002B-DF6E-4F78-8BF1-95D63F3D7A42}
+	EndGlobalSection
+EndGlobal
