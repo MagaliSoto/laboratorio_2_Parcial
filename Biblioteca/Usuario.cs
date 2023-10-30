@@ -4,26 +4,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Biblioteca
+namespace Clases
 {
     /// <summary>
     /// Representa un objeto que imita el comportamiento
-    /// de un usuario generico con nombre y rol.
+    /// de un usuario generico con Nombre y rol.
     /// </summary>
     public abstract class Usuario
     {
-        public string nombre;
-        public string rol;
+        public string Nombre {get; set;}
+        public string Rol { get; set; }
 
         /// <summary>
         /// Inicializa una nueva instancia de Usuario
         /// </summary>
-        /// <param name="nombre">nombre que se le asigna al objeto</param>
+        /// <param name="nombre">Nombre que se le asigna al objeto</param>
         /// <param name="rol">rol que se le asigna al objeto</param>
         public Usuario(string nombre, string rol)
         {
-            this.nombre = nombre;
-            this.rol = rol;
+            Nombre = nombre;
+            Rol = rol;
         }
 
         /// <summary>
@@ -35,8 +35,7 @@ namespace Biblioteca
         /// False si no coinciden</returns>
         public static bool operator ==(Usuario u1, string u2)
         {
-
-            return u1.nombre == u2;
+            return u1.Nombre == u2;
         }
 
         /// <summary>
@@ -48,7 +47,6 @@ namespace Biblioteca
         /// True si los nombres coinciden</returns>
         public static bool operator !=(Usuario u1, string u2)
         {
-
             return !(u1 == u2);
         }
 
@@ -72,30 +70,18 @@ namespace Biblioteca
 
     /// <summary>
     /// Representa un objeto que imita el comportamiento de
-    /// un Operario, siendo este un tipo de Usuario
+    /// un Operario, siendo este un Tipo de Usuario
     /// </summary>
     public class Operario : Usuario
     {
         /// <summary>
         /// Inicializa el una nueva instancia de Operario
         /// </summary>
-        /// <param name="nombre">nombre que se le asigna al objeto</param>
-        public Operario(string nombre) : base(nombre, "Operario")
-        {
-            
-        }
-        
-        public override bool EsUsuarioValido(string usuario, string contraseña)
-        {
-            if ((usuario == "operario1" || usuario == "operario2") && contraseña == "12345")
-            {
-                return true;
-            }
-            return false;
-        }
+        /// <param name="nombre">Nombre que se le asigna al objeto</param>
+        public Operario(string nombre) : base(nombre, "Operario") { }
 
         /// <summary>
-        /// Verifica si un usuario es valido y lo agrega a una lista
+        /// Verifica si un usuario operario es valido y lo agrega a una lista
         /// </summary>
         /// <param name="usuario">usuario usado para validar</param>
         /// <param name="contraseña">contraseña usada para validar</param>
@@ -104,8 +90,12 @@ namespace Biblioteca
         /// <param name="usuarioActual">objeto Operario creado al validar</param>
         /// <returns>True si el usuario Y la contraseña coinciden,
         /// en caso contrario False.</returns>
-        public static bool EsUsuarioValido(string usuario, string contraseña,
-            List<Usuario> lista, out Usuario? usuarioActual)
+        public static bool EsOperarioValido(
+            string usuario, 
+            string contraseña,
+            List<Usuario> lista, 
+            out Usuario? usuarioActual
+        )
         {
             if ((usuario == "operario1" || usuario == "operario2") && contraseña == "12345")
             {
@@ -124,19 +114,16 @@ namespace Biblioteca
 
     /// <summary>
     /// Representa un objeto que imita el comportamiento de
-    /// un Supervisor, siendo este un tipo de Operario
+    /// un Supervisor, siendo este un Tipo de Operario
     /// con mas metodos
     /// </summary>
-    public class Supervisor : Operario
+    public class Supervisor : Usuario
     {
         /// <summary>
         /// Inicializa el una nueva instancia de Supervisor
         /// </summary>
-        /// <param name="nombre">nombre que se le asigna al objeto</param>
-        public Supervisor(string nombre) : base(nombre)
-        {
-            rol = "Supervisor";
-        }
+        /// <param name="nombre">Nombre que se le asigna al objeto</param>
+        public Supervisor(string nombre) : base(nombre, "Supervisor") { }
 
         /// <summary>
         /// Verifica si un usuario es valido y crea una nueva 
@@ -147,8 +134,11 @@ namespace Biblioteca
         /// <param name="usuarioActual">objeto Supervisor creado al validar</param>
         /// <returns>True si el usuario Y la contraseña coinciden,
         /// en caso contrario False.</returns>
-        public static bool EsSupervisorValido(string usuario, string contraseña,
-            out Usuario? usuarioActual)
+        public static bool EsSupervisorValido(
+            string usuario, 
+            string contraseña,
+            out Usuario? usuarioActual
+        )
         {
             if (usuario == "supervisor1" && contraseña == "12345")
             {
@@ -170,7 +160,7 @@ namespace Biblioteca
             string mensaje = "";
             foreach (var operario in operarios)
             {
-                mensaje += $"NOMBRE: {operario.nombre}\tROL: {operario.rol}\n";
+                mensaje += $"NOMBRE: {operario.Nombre}\tROL: {operario.Rol}\n";
             }
             if (operarios.Count == 0)
             {

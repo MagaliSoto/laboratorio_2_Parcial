@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\sotom\\OneDrive\\Escritorio\\Ejercicios C#\\Parciales\\Soto.Magali.Parcial1\\Biblioteca\\Biblioteca.csproj",
-      "projectName": "Biblioteca",
-      "projectPath": "C:\\Users\\sotom\\OneDrive\\Escritorio\\Ejercicios C#\\Parciales\\Soto.Magali.Parcial1\\Biblioteca\\Biblioteca.csproj",
+      "projectUniqueName": "C:\\Users\\sotom\\OneDrive\\Escritorio\\Soto.Magali.Parcial\\Biblioteca\\Clases.csproj",
+      "projectName": "Clases",
+      "projectPath": "C:\\Users\\sotom\\OneDrive\\Escritorio\\Soto.Magali.Parcial\\Biblioteca\\Clases.csproj",
       "packagesPath": "C:\\Users\\sotom\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\sotom\\OneDrive\\Escritorio\\Ejercicios C#\\Parciales\\Soto.Magali.Parcial1\\Biblioteca\\obj\\",
+      "outputPath": "C:\\Users\\sotom\\OneDrive\\Escritorio\\Soto.Magali.Parcial\\Biblioteca\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\sotom\\AppData\\Roaming\\NuGet\\NuGet.Config",
