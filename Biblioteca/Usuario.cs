@@ -14,16 +14,69 @@ namespace Clases
     {
         public string Nombre {get; set;}
         public string Rol { get; set; }
+        public int Legajo { get; set; }
+        public DateTime Antiguedad { get; set; }
 
+        public Usuario() { }
         /// <summary>
         /// Inicializa una nueva instancia de Usuario
         /// </summary>
         /// <param name="nombre">Nombre que se le asigna al objeto</param>
         /// <param name="rol">rol que se le asigna al objeto</param>
-        public Usuario(string nombre, string rol)
+        public Usuario(string nombre, string rol, int legajo)
         {
             Nombre = nombre;
             Rol = rol;
+            Legajo = legajo;
+        }
+
+        /// <summary>
+        /// Guarda los datos de usuario en la base de datos
+        /// y en un archivo.xml ordenados por antiguedad
+        /// </summary>
+        /// <param name="usuario">nombre del usuario</param>
+        /// <param name="contraseña">contraseña del usuario</param>
+        /// <param name="rolSeleccionado">rol del usuario</param>
+        /// <param name="ruta">la ruta donde se guardara el archivo</param>
+        /// <returns>un mensaje en caso de que se haya podido
+        /// registrar, o en caso contrario con el error</returns>
+        public static async Task<string> RegistrarUsuario(
+            string usuario,
+            string contraseña,
+            object rolSeleccionado,
+            string ruta
+        )
+        {
+            string mensaje;
+            Random random = new();
+
+            int legajo = random.Next(100000, 1000000);
+
+            if (usuario != "" && contraseña != "" && rolSeleccionado != null)
+            {
+                string? rol = rolSeleccionado.ToString();
+
+                try
+                {
+                    await UsuarioDAO.Guardar(usuario, rol, contraseña, legajo);
+                    mensaje = "Usuario registrado";
+                }
+                catch (Exception e)
+                {
+                    Archivos<string>.Escribir_TXT(ruta + "archivo.txt", Archivos<string>.LogError(e), true);
+                    mensaje = e.Message;
+                }
+            }
+            else
+            {
+                mensaje = "Debe completar todos los campos para registrarse";
+            }
+
+            List<Usuario> usuarios = UsuarioDAO.Leer();
+            usuarios.Sort((u1, u2) => u1.Antiguedad.CompareTo(u2.Antiguedad));
+
+            Archivos<List<Usuario>>.Escribir_XML(ruta + "archivo.xml", usuarios);
+            return mensaje;
         }
 
         /// <summary>
@@ -31,11 +84,11 @@ namespace Clases
         /// </summary>
         /// <param name="u1">Usuario a comprar</param>
         /// <param name="u2">string a comparar</param>
-        /// <returns>True si los nombres coinciden,
+        /// <returns>True si los nombres coinciden o son nulos ,
         /// False si no coinciden</returns>
         public static bool operator ==(Usuario u1, string u2)
         {
-            return u1.Nombre == u2;
+            return ReferenceEquals(u1, null) && u2 == null || u1?.Nombre == u2;
         }
 
         /// <summary>
@@ -48,125 +101,6 @@ namespace Clases
         public static bool operator !=(Usuario u1, string u2)
         {
             return !(u1 == u2);
-        }
-
-        /// <summary>
-        /// Valida el ususario mediante usuario y contraseña
-        /// </summary>
-        /// <param name="usuario">usuario usado para validar</param>
-        /// <param name="contraseña">contraseña usada para validar</param>
-        /// <returns>True si el usuario Y la contraseña coinciden,
-        /// en caso contrario False.</returns>
-        public virtual bool EsUsuarioValido(string usuario, string contraseña)
-        {
-            if ((usuario == "usuario1" || usuario == "usuario2")
-                && contraseña == "12345")
-            {
-                return true;
-            }
-            return false;
-        }
-    }
-
-    /// <summary>
-    /// Representa un objeto que imita el comportamiento de
-    /// un Operario, siendo este un Tipo de Usuario
-    /// </summary>
-    public class Operario : Usuario
-    {
-        /// <summary>
-        /// Inicializa el una nueva instancia de Operario
-        /// </summary>
-        /// <param name="nombre">Nombre que se le asigna al objeto</param>
-        public Operario(string nombre) : base(nombre, "Operario") { }
-
-        /// <summary>
-        /// Verifica si un usuario operario es valido y lo agrega a una lista
-        /// </summary>
-        /// <param name="usuario">usuario usado para validar</param>
-        /// <param name="contraseña">contraseña usada para validar</param>
-        /// <param name="lista">lista de objetos Usuario donde se van a
-        /// agregar los ususario validados</param>
-        /// <param name="usuarioActual">objeto Operario creado al validar</param>
-        /// <returns>True si el usuario Y la contraseña coinciden,
-        /// en caso contrario False.</returns>
-        public static bool EsOperarioValido(
-            string usuario, 
-            string contraseña,
-            List<Usuario> lista, 
-            out Usuario? usuarioActual
-        )
-        {
-            if ((usuario == "operario1" || usuario == "operario2") && contraseña == "12345")
-            {
-                usuarioActual = new Operario(usuario);
-
-                if (!lista.Any(operario => operario == usuario))
-                {
-                    lista.Add(usuarioActual);
-                }
-                return true;
-            }
-            usuarioActual = null;
-            return false;
-        }
-    }
-
-    /// <summary>
-    /// Representa un objeto que imita el comportamiento de
-    /// un Supervisor, siendo este un Tipo de Operario
-    /// con mas metodos
-    /// </summary>
-    public class Supervisor : Usuario
-    {
-        /// <summary>
-        /// Inicializa el una nueva instancia de Supervisor
-        /// </summary>
-        /// <param name="nombre">Nombre que se le asigna al objeto</param>
-        public Supervisor(string nombre) : base(nombre, "Supervisor") { }
-
-        /// <summary>
-        /// Verifica si un usuario es valido y crea una nueva 
-        /// instancia del objeto Supervisor
-        /// </summary>
-        /// <param name="usuario">usuario usado para validar</param>
-        /// <param name="contraseña">contraseña usada para validar</param>
-        /// <param name="usuarioActual">objeto Supervisor creado al validar</param>
-        /// <returns>True si el usuario Y la contraseña coinciden,
-        /// en caso contrario False.</returns>
-        public static bool EsSupervisorValido(
-            string usuario, 
-            string contraseña,
-            out Usuario? usuarioActual
-        )
-        {
-            if (usuario == "supervisor1" && contraseña == "12345")
-            {
-                usuarioActual = new Supervisor(usuario);
-                return true;
-            }
-            usuarioActual = null;
-            return false;
-        }
-
-        /// <summary>
-        /// Obtiene informacion de los operarios registrados
-        /// </summary>
-        /// <param name="operarios">lista de operarios registrados</param>
-        /// <returns>un mensaje con los operarios registrados si se
-        /// encontraron, o uno diciendo que no hay</returns>
-        public static string VerInformacionOperarios(List<Usuario> operarios)
-        {
-            string mensaje = "";
-            foreach (var operario in operarios)
-            {
-                mensaje += $"NOMBRE: {operario.Nombre}\tROL: {operario.Rol}\n";
-            }
-            if (operarios.Count == 0)
-            {
-                mensaje = "No hay operarios registrados";
-            }
-            return mensaje;
         }
     }
 }

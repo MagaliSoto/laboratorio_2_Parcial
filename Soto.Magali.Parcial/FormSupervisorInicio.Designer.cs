@@ -121,7 +121,7 @@
             buttonSalir.UseVisualStyleBackColor = false;
             buttonSalir.Click += ButtonSalir_Click;
             // 
-            // FormSupervisorInicio
+            // formSupervisorInicio
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -136,7 +136,7 @@
             Controls.Add(labelPreguntaAccion);
             Controls.Add(labelMenuPrincipal);
             FormBorderStyle = FormBorderStyle.FixedToolWindow;
-            Name = "FormSupervisorInicio";
+            Name = "formSupervisorInicio";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Inicio";
             ResumeLayout(false);

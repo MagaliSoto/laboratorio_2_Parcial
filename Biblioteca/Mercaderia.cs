@@ -18,6 +18,7 @@ namespace Clases
         public string Nombre { get; set; }
         public int CantidadAGastar {get;set;}
 
+        public Mercaderia() { }
         /// <summary>
         /// Inicializa una nueva instancia de Mercaderia.
         /// </summary>

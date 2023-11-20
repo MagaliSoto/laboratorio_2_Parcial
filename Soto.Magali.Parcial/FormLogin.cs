@@ -6,23 +6,27 @@ namespace Soto.Magali.Parcial
     /// <summary>
     /// Formulario para visualizar y gestionar el inicio de sesion.
     /// </summary>
-    public partial class FormLogin : Form
+    public partial class FormLogin : FormBase
     {
+        internal Usuario? usuarioActual;
+        internal List<Usuario>? listaOperarios;
+        public FormLineaDeProduccion formLineaDeProduccion { get; set; }
         private Inventario inventarioCompartido;
-        internal Usuario usuarioActual;
-        internal FormLineaDeProduccion formLineaDeProduccion;
         private FormSupervisorInicio formSupervisorInicio;
-        internal List<Usuario> listaOperarios = new();
+        private FormRegistro formRegistro;
+        private FormConfiguracion formConfiguracion;
 
         /// <summary>
-        /// Inicializa una nueva instancia de FormLogin
+        /// Inicializa una nueva instancia de formLogin
         /// </summary>
         public FormLogin()
         {
             InitializeComponent();
-            inventarioCompartido = new Inventario();
-            formSupervisorInicio = new(inventarioCompartido, this);
-            formLineaDeProduccion = new(inventarioCompartido, this, formSupervisorInicio);
+            inventarioCompartido = new();
+            formRegistro = new(this);
+            formConfiguracion = new(this);
+            formSupervisorInicio = new(this, inventarioCompartido);
+            formLineaDeProduccion = new(this, formSupervisorInicio, inventarioCompartido);
         }
 
         /// <summary>
@@ -35,44 +39,50 @@ namespace Soto.Magali.Parcial
             string usuario = textBoxNombreDeUsuario.Text;
             string contraseña = textBoxContraseña.Text;
 
-            if (Operario.EsOperarioValido(usuario, contraseña, 
-                listaOperarios, out usuarioActual))
+            if (usuario != "" && contraseña != "")
             {
-                formLineaDeProduccion.Show();
-                this.Hide();
-            }
-            else if (Supervisor.EsSupervisorValido(usuario, 
-                contraseña,out usuarioActual))
-            {
-                formSupervisorInicio.Show();
-                this.Hide();
+                usuarioActual = UsuarioDAO.Autenticar(usuario, contraseña);
+                DateTime creacion = UsuarioDAO.LeerAntiguedad(usuarioActual.Nombre);
+                usuarioActual.Antiguedad = creacion;
+
+                if (usuarioActual == null)
+                {
+                    MessageBox.Show("Usuario o contraseña incorrectas");
+                }
+                else if(usuarioActual.Rol == "Operario")
+                {
+                    formLineaDeProduccion.ActualizarConfiguracionesForm(formLineaDeProduccion);
+                    formLineaDeProduccion.Show();
+                    this.Hide();
+                    formLineaDeProduccion.InicializarTemporizador();
+                }
+                else if (usuarioActual.Rol == "Supervisor")
+                {
+                    formSupervisorInicio.ActualizarConfiguracionesForm(formSupervisorInicio);
+                    formSupervisorInicio.Show();
+                    this.Hide();
+                    formSupervisorInicio.InicializarTemporizador();
+                }
             }
             else
             {
-                MessageBox.Show("Usuario o contraseña incorrectas");
-            }
+                MessageBox.Show("Complete los datos para ingresar");
+            }            
         }
 
-        /// <summary>
-        /// Manejador de eventos para el botón "Supervisor",
-        /// establece los valores de el usuario y la contraseña
-        /// del supervisor
-        /// </summary>
-        private void ButtonSupervisor_Click(object sender, EventArgs e)
+        private void ButtonConfiguraciones_Click(object sender, EventArgs e)
         {
-            textBoxNombreDeUsuario.Text = "supervisor1";
-            textBoxContraseña.Text = "12345";
-        }
+            formConfiguracion.Show();
+            this.Hide();
+            formConfiguracion.InicializarTemporizador();
+        }   
 
-        /// <summary>
-        /// Manejador de eventos para el botón "Supervisor",
-        /// establece los valores de el usuario y la contraseña
-        /// del operario
-        /// </summary>
-        private void ButtonOperario_Click(object sender, EventArgs e)
+        private void ButtonRegistro_Click(object sender, EventArgs e)
         {
-            textBoxNombreDeUsuario.Text = "operario1";
-            textBoxContraseña.Text = "12345";
+            formRegistro.ActualizarConfiguracionesForm(formRegistro);
+            formRegistro.Show();
+            this.Hide();
+            formRegistro.InicializarTemporizador();
         }
     }
 }

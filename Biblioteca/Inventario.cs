@@ -9,21 +9,18 @@ using System.Xml.Linq;
 namespace Clases
 {
     /// <summary>
-    /// Representa un inventario que contiene una lista
-    /// con las mercaderias en stock, y un diccionario
-    /// con los productos en stock
+    /// Representa un inventario que se encarga de
+    /// modificar la mercaderia de la base de datos
     /// </summary>
     public class Inventario
     {
         public List<Mercaderia> StockMercaderia { get; set; }
-        public Dictionary<Producto,int>? StockProductos { get; set; }
 
         /// <summary>
         /// Inicializa una nueva instancia de Inventario
         /// y de los objetos Mercaderia con sus respectivos 
-        /// nombres y cantidades, agregandolos a una lista.
-        /// Y crea un diccionario donde se guardaran los
-        /// productos creados.
+        /// nombres y cantidades, agregandolos a la
+        /// base de datos
         /// </summary>
         public Inventario()
         {
@@ -37,8 +34,21 @@ namespace Clases
                 new("Envoltorio", TipoMercaderia.papel),
                 new("Recipiente", TipoMercaderia.papel)
             };
+            InventarioDAO.Eliminar();
+            foreach (var mercaderia in StockMercaderia)
+            {
+                InventarioDAO.GuardarMercaderia(mercaderia.Cantidad, mercaderia.Nombre);
+            }
+        }
 
-            StockProductos = new Dictionary<Producto,int> { };
+        /// <summary>
+        /// llama al metodo LeerMercaderias de
+        /// InventarioDAO
+        /// </summary>
+        /// <returns>mercaderia en stock</returns>
+        public List<Mercaderia> Leer()
+        {
+            return InventarioDAO.LeerMercaderias();
         }
 
         /// <summary>
@@ -56,25 +66,31 @@ namespace Clases
             int cantidadDeProductosAGenerar,
             List<Mercaderia> listaMercaderias,
             out string mensajeError
-        )
+)
         {
             mensajeError = "No es posible hacer el producto, por falta de:\n";
 
             foreach (Mercaderia mercaderia in listaMercaderias)
             {
-                Mercaderia stockMercaderia = StockMercaderia.FirstOrDefault(m => m.Nombre == mercaderia.Nombre);
-
-                if (stockMercaderia != null)
+                try
                 {
+                    Mercaderia mercaderiaStock = InventarioDAO.LeerMercaderia(mercaderia.Nombre);
+
                     int cantidadAGastar = mercaderia.CantidadAGastar;
-                    if (stockMercaderia.Cantidad < (cantidadAGastar * cantidadDeProductosAGenerar))
+
+                    if (mercaderiaStock.Cantidad < (cantidadAGastar * cantidadDeProductosAGenerar))
                     {
-                        mensajeError += stockMercaderia.Nombre + "\n";
+                        mensajeError += mercaderiaStock.Nombre + "\n";
                     }
                     else
                     {
-                        stockMercaderia.Cantidad += -(cantidadAGastar * cantidadDeProductosAGenerar);
+                        int cantidad = mercaderiaStock.Cantidad - (cantidadAGastar * cantidadDeProductosAGenerar);
+                        InventarioDAO.ModificarMercaderia(mercaderia.Nombre, cantidad);
                     }
+                }
+                catch (Exception)
+                {
+                    mensajeError += mercaderia.Nombre + "\n";
                 }
             }
             return mensajeError == "No es posible hacer el producto, por falta de:\n";

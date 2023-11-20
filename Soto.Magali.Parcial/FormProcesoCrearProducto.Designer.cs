@@ -33,14 +33,14 @@
             labelPasosParaCrearProducto = new Label();
             SuspendLayout();
             // 
-            // label1
+            // labelColorTexto
             // 
             label1.AutoSize = true;
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Sitka Text", 15.7499981F, FontStyle.Bold | FontStyle.Italic | FontStyle.Underline, GraphicsUnit.Point);
             label1.ForeColor = Color.Crimson;
             label1.Location = new Point(173, 66);
-            label1.Name = "label1";
+            label1.Name = "labelColorTexto";
             label1.Size = new Size(240, 30);
             label1.TabIndex = 0;
             label1.Text = "Creando el producto...";
@@ -58,7 +58,7 @@
             labelPasosParaCrearProducto.Text = "Este proceso puede tardar unos minutos";
             labelPasosParaCrearProducto.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // FormProcesoCrearProducto
+            // formProcesoCrearProducto
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -68,9 +68,9 @@
             Controls.Add(labelPasosParaCrearProducto);
             Controls.Add(label1);
             FormBorderStyle = FormBorderStyle.FixedToolWindow;
-            Name = "FormProcesoCrearProducto";
+            Name = "formProcesoCrearProducto";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Creacion del producto";
+            Text = "Antiguedad del producto";
             ResumeLayout(false);
             PerformLayout();
         }

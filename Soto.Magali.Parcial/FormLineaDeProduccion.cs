@@ -17,33 +17,33 @@ namespace Soto.Magali.Parcial
     /// Formulario para visualizar y gestionar la linea de produccion
     /// de los productos.
     /// </summary>
-    public partial class FormLineaDeProduccion : Form
+    public partial class FormLineaDeProduccion : FormBase
     {
-        private Inventario inventarioCompartido;
         private FormLogin formLogin;
         private FormSupervisorInicio formSupervisorInicio;
-        private FormProcesoCrearProducto formProcesoCrearProducto;
+        private FormProcesoCrearProducto? formProcesoCrearProducto;
         private FabricasProducto fabricasProductos;
-
-        public string mensajeError;
+        private Inventario inventarioCompartido;
+        public string? mensajeError;
 
         /// <summary>
-        ///  Inicializa una nueva instancia de FormLineaDeProduccion
+        ///  Inicializa una nueva instancia de formLineaDeProduccion
         /// </summary>
-        /// <param name="inventarioCompartido">inventario compartido con mercaderias</param>
         /// <param name="formLogin">formulario de inicio de sesion</param>
         /// <param name="formSupervisorInicio">formulario de inicio del supervisor</param>
+        /// <param name="inventario">inventario comprartido</param>
         public FormLineaDeProduccion(
-            Inventario inventarioCompartido, 
             FormLogin formLogin,
-            FormSupervisorInicio formSupervisorInicio
+            FormSupervisorInicio formSupervisorInicio,
+            Inventario inventario
         )
         {
             InitializeComponent();
-            this.formLogin = formLogin;
-            this.inventarioCompartido = inventarioCompartido;
-            this.formSupervisorInicio = formSupervisorInicio;
             fabricasProductos = new();
+
+            this.formLogin = formLogin;
+            this.formSupervisorInicio = formSupervisorInicio;
+            inventarioCompartido = inventario;
         }
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace Soto.Magali.Parcial
         /// </summary>
         private void ButtonProducir_Click(object sender, EventArgs e)
         {
-            string productoSeleccionado;
+            string? productoSeleccionado;
             int cantidadAProducir = (int)numericUpDownCantidadAProducir.Value;
 
             if (listBoxProducto.SelectedItem != null)
@@ -62,18 +62,24 @@ namespace Soto.Magali.Parcial
                 productoSeleccionado = listBoxProducto.SelectedItem.ToString();
 
                 FabricaProducto fabricaProducto = fabricasProductos.listadoFabricas[productoSeleccionado];
-                mensajeError = fabricaProducto.Fabricar(inventarioCompartido, cantidadAProducir);
+                mensajeError = fabricaProducto.Fabricar(inventarioCompartido, cantidadAProducir, 0);
 
                 if (mensajeError == "")
                 {
-                    formProcesoCrearProducto = new(this, fabricaProducto.PasosProduccion);
+                    formProcesoCrearProducto = new FormProcesoCrearProducto(this, fabricaProducto.PasosProduccion);
+
+                    formProcesoCrearProducto.ProcesoProductoCompletado += ProcesoCrearProductoCompletado;
+
+                    formProcesoCrearProducto.ActualizarConfiguracionesForm(formProcesoCrearProducto);
                     formProcesoCrearProducto.Show();
                     this.Hide();
+
+                    this.DetenerTemporizador();
                 }
                 else
                 {
                     MessageBox.Show(mensajeError);
-                }
+                }                
             }
             else
             {
@@ -82,17 +88,22 @@ namespace Soto.Magali.Parcial
             }
         }
 
+        private void ProcesoCrearProductoCompletado(object sender, EventArgs e)
+        {
+            MessageBox.Show("Producto creado");
+        }
+
         /// <summary>
         /// Maneja el evento de selección de un producto en el ListBox,
         /// actualiza las listBox de mercaderías y cantidades segun 
         /// el producto seleccionado.
         /// </summary>
-        private void ListBoxProducto_SelectedIndexChanged_1(object sender, EventArgs e)
+        private void ListBoxProducto_SelectedIndexChanged(object sender, EventArgs e)
         {
             listBoxMercaderia.Items.Clear();
             listBoxCantidad.Items.Clear();
 
-            string productoSeleccionado = listBoxProducto.SelectedItem.ToString();
+            string? productoSeleccionado = listBoxProducto.SelectedItem.ToString();
 
             string[] conitoMercaderia = {
                 "Dulce de leche",
@@ -133,11 +144,15 @@ namespace Soto.Magali.Parcial
             {
                 formSupervisorInicio.Show();
                 this.Hide();
+
+                this.DetenerTemporizador();
             }
             else if (formLogin.usuarioActual.Rol == "Operario")
             {
                 formLogin.Show();
                 this.Hide();
+
+                this.DetenerTemporizador();
             }
         }
 
@@ -149,11 +164,14 @@ namespace Soto.Magali.Parcial
         private void ButtonVerProductos_Click(object sender, EventArgs e)
         {
             string mensajeProductos = "PRODUCTOS:";
-            if (inventarioCompartido.StockProductos.Any())
+
+            List<Producto> listaProductos = InventarioDAO.LeerProductos();
+
+            if (listaProductos.Count != 0)                
             {
-                foreach (var producto in inventarioCompartido.StockProductos)
+                foreach (var producto in listaProductos)
                 {
-                    mensajeProductos += $"\nNombre: {producto.Key.Nombre}\tCantidad: {producto.Value}";
+                    mensajeProductos += $"\nNombre: {producto.Nombre}\tCantidad: {producto.Cantidad}";
                 }
             }
             else

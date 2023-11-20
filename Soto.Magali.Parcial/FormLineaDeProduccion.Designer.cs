@@ -43,16 +43,16 @@
             ((System.ComponentModel.ISupportInitialize)numericUpDownCantidadAProducir).BeginInit();
             SuspendLayout();
             // 
-            // listBoxProducto
+            // listBoxFuentes
             // 
             listBoxProducto.FormattingEnabled = true;
             listBoxProducto.ItemHeight = 15;
             listBoxProducto.Items.AddRange(new object[] { "Conito", "Chocotorta" });
             listBoxProducto.Location = new Point(24, 46);
-            listBoxProducto.Name = "listBoxProducto";
+            listBoxProducto.Name = "listBoxFuentes";
             listBoxProducto.Size = new Size(120, 34);
             listBoxProducto.TabIndex = 0;
-            listBoxProducto.SelectedIndexChanged += ListBoxProducto_SelectedIndexChanged_1;
+            listBoxProducto.SelectedIndexChanged += ListBoxProducto_SelectedIndexChanged;
             // 
             // listBoxMercaderia
             // 
@@ -99,13 +99,13 @@
             labelCantidad.Text = "Cantidad";
             labelCantidad.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // labelProducto
+            // labelFuente
             // 
             labelProducto.BackColor = Color.Transparent;
             labelProducto.Font = new Font("Sitka Text", 9F, FontStyle.Bold, GraphicsUnit.Point);
             labelProducto.ForeColor = Color.Crimson;
             labelProducto.Location = new Point(24, 15);
-            labelProducto.Name = "labelProducto";
+            labelProducto.Name = "labelFuente";
             labelProducto.Size = new Size(120, 28);
             labelProducto.TabIndex = 10;
             labelProducto.Text = "Producto";
@@ -178,7 +178,7 @@
             buttonVerProductos.UseVisualStyleBackColor = false;
             buttonVerProductos.Click += ButtonVerProductos_Click;
             // 
-            // FormLineaDeProduccion
+            // formLineaDeProduccion
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -197,7 +197,7 @@
             Controls.Add(labelMercaderia);
             Controls.Add(listBoxProducto);
             FormBorderStyle = FormBorderStyle.FixedToolWindow;
-            Name = "FormLineaDeProduccion";
+            Name = "formLineaDeProduccion";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Linea de Produccion";
             ((System.ComponentModel.ISupportInitialize)numericUpDownCantidadAProducir).EndInit();

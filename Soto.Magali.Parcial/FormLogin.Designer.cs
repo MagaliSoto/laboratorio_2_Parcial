@@ -36,8 +36,8 @@
             textBoxNombreDeUsuario = new TextBox();
             textBoxContraseña = new TextBox();
             buttonIngresar = new Button();
-            buttonSupervisor = new Button();
-            buttonOperario = new Button();
+            buttonConfiguraciones = new Button();
+            buttonRegistro = new Button();
             SuspendLayout();
             // 
             // labelBienvenidos
@@ -118,47 +118,47 @@
             buttonIngresar.UseVisualStyleBackColor = false;
             buttonIngresar.Click += ButtonIngresar_Click;
             // 
-            // buttonSupervisor
+            // buttonConfiguraciones
             // 
-            buttonSupervisor.BackColor = Color.White;
-            buttonSupervisor.FlatAppearance.BorderColor = Color.PaleVioletRed;
-            buttonSupervisor.FlatAppearance.BorderSize = 2;
-            buttonSupervisor.FlatStyle = FlatStyle.Flat;
-            buttonSupervisor.Font = new Font("Sitka Text", 9.749999F, FontStyle.Regular, GraphicsUnit.Point);
-            buttonSupervisor.ForeColor = SystemColors.ControlText;
-            buttonSupervisor.Location = new Point(105, 302);
-            buttonSupervisor.Name = "buttonSupervisor";
-            buttonSupervisor.Size = new Size(156, 31);
-            buttonSupervisor.TabIndex = 7;
-            buttonSupervisor.Text = "Supervisor";
-            buttonSupervisor.UseVisualStyleBackColor = false;
-            buttonSupervisor.Click += ButtonSupervisor_Click;
+            buttonConfiguraciones.BackColor = Color.White;
+            buttonConfiguraciones.FlatAppearance.BorderColor = Color.PaleVioletRed;
+            buttonConfiguraciones.FlatAppearance.BorderSize = 2;
+            buttonConfiguraciones.FlatStyle = FlatStyle.Flat;
+            buttonConfiguraciones.Font = new Font("Sitka Text", 9.749999F, FontStyle.Regular, GraphicsUnit.Point);
+            buttonConfiguraciones.ForeColor = SystemColors.ControlText;
+            buttonConfiguraciones.Location = new Point(105, 302);
+            buttonConfiguraciones.Name = "buttonConfiguraciones";
+            buttonConfiguraciones.Size = new Size(156, 31);
+            buttonConfiguraciones.TabIndex = 7;
+            buttonConfiguraciones.Text = "Configuraciones";
+            buttonConfiguraciones.UseVisualStyleBackColor = false;
+            buttonConfiguraciones.Click += ButtonConfiguraciones_Click;
             // 
-            // buttonOperario
+            // buttonRegistro
             // 
-            buttonOperario.BackColor = Color.White;
-            buttonOperario.FlatAppearance.BorderColor = Color.PaleVioletRed;
-            buttonOperario.FlatAppearance.BorderSize = 2;
-            buttonOperario.FlatStyle = FlatStyle.Flat;
-            buttonOperario.Font = new Font("Sitka Text", 9.749999F, FontStyle.Regular, GraphicsUnit.Point);
-            buttonOperario.ForeColor = SystemColors.ControlText;
-            buttonOperario.Location = new Point(267, 302);
-            buttonOperario.Name = "buttonOperario";
-            buttonOperario.Size = new Size(156, 31);
-            buttonOperario.TabIndex = 8;
-            buttonOperario.Text = "Operario";
-            buttonOperario.UseVisualStyleBackColor = false;
-            buttonOperario.Click += ButtonOperario_Click;
+            buttonRegistro.BackColor = Color.White;
+            buttonRegistro.FlatAppearance.BorderColor = Color.PaleVioletRed;
+            buttonRegistro.FlatAppearance.BorderSize = 2;
+            buttonRegistro.FlatStyle = FlatStyle.Flat;
+            buttonRegistro.Font = new Font("Sitka Text", 9.749999F, FontStyle.Regular, GraphicsUnit.Point);
+            buttonRegistro.ForeColor = SystemColors.ControlText;
+            buttonRegistro.Location = new Point(267, 302);
+            buttonRegistro.Name = "buttonRegistro";
+            buttonRegistro.Size = new Size(156, 31);
+            buttonRegistro.TabIndex = 8;
+            buttonRegistro.Text = "Registrar";
+            buttonRegistro.UseVisualStyleBackColor = false;
+            buttonRegistro.Click += ButtonRegistro_Click;
             // 
-            // FormLogin
+            // formLogin
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoSize = true;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             ClientSize = new Size(718, 401);
-            Controls.Add(buttonOperario);
-            Controls.Add(buttonSupervisor);
+            Controls.Add(buttonRegistro);
+            Controls.Add(buttonConfiguraciones);
             Controls.Add(buttonIngresar);
             Controls.Add(textBoxContraseña);
             Controls.Add(textBoxNombreDeUsuario);
@@ -168,7 +168,7 @@
             Controls.Add(labelBienvenidos);
             ForeColor = SystemColors.Control;
             FormBorderStyle = FormBorderStyle.FixedToolWindow;
-            Name = "FormLogin";
+            Name = "formLogin";
             ShowIcon = false;
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Login";
@@ -185,7 +185,7 @@
         private TextBox textBoxNombreDeUsuario;
         private TextBox textBoxContraseña;
         private Button buttonIngresar;
-        private Button buttonSupervisor;
-        private Button buttonOperario;
+        private Button buttonConfiguraciones;
+        private Button buttonRegistro;
     }
 }

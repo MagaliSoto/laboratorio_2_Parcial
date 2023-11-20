@@ -47,32 +47,41 @@ namespace Clases
 
         /// <summary>
         /// Crea una Cantidad especifica de productos,
-        /// modificando las cantidades de las mercaderias utilizadas.
+        /// modificando las cantidades de las mercaderias 
+        /// utilizadas en la base de datos
         /// </summary>
         /// <param name="inventario">inventario compartido con el stock de
         /// las mercaderias y de los productos</param>
         /// <param name="cantidadAProducir">cantidad de productos
         /// que se van a crear</param>
+        /// <param name="id">posicion en la base de datos</param>
         /// <returns>un string vacio si se completo correctamente, o uno
         /// con las mercaderias faltantes</returns>
-        public override string Fabricar(Inventario inventario, int cantidadAProducir)
+        public override string Fabricar(Inventario inventario, int cantidadAProducir, int id)
         {
             if (inventario.ModificarStock(cantidadAProducir,Receta,out mensajeError))
             {
-                for (int i = 0; i < cantidadAProducir; i++)
+                List<Producto> listaProductos = InventarioDAO.LeerProductos();
+
+                bool contieneChocotorta = listaProductos.Any(p => p.Nombre == "Chocotorta");
+
+                if (listaProductos.Count != 0 && contieneChocotorta)
                 {
-                    chocotorta = new("chocotorta", Receta);
-                    if (inventario.StockProductos.ContainsKey(chocotorta))
+                    foreach (var producto in listaProductos)
                     {
-                        inventario.StockProductos[chocotorta] += 1;
-                    }
-                    else
-                    {
-                        inventario.StockProductos.Add(chocotorta, 1);
+                        if (producto.Nombre == "Chocotorta")
+                        {
+                            producto.Cantidad += cantidadAProducir;
+                            InventarioDAO.ModificarProducto("Chocotorta", producto.Cantidad);
+                        }
                     }
                 }
+                else
+                {
+                    InventarioDAO.GuardarProducto("Chocotorta", cantidadAProducir);
+                }
                 return mensajeError = "";
-            }
+            }            
             return mensajeError;
         }
     }

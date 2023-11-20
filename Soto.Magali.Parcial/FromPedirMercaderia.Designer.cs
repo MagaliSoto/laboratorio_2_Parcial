@@ -71,7 +71,6 @@
             buttonPedir.TabIndex = 2;
             buttonPedir.Text = "Pedir";
             buttonPedir.UseVisualStyleBackColor = false;
-            buttonPedir.Click += ButtonPedir_Click;
             // 
             // labelMercaderia
             // 
@@ -110,7 +109,6 @@
             buttonAtras.TabIndex = 7;
             buttonAtras.Text = "Atras";
             buttonAtras.UseVisualStyleBackColor = false;
-            buttonAtras.Click += ButtonAtras_Click;
             // 
             // FormPedirMercaderia
             // 
@@ -129,6 +127,7 @@
             Name = "FormPedirMercaderia";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Pedir Mercaderia";
+            Load += FormPedirMercaderia_Load;
             ((System.ComponentModel.ISupportInitialize)numericUpDownCantidad).EndInit();
             ResumeLayout(false);
         }

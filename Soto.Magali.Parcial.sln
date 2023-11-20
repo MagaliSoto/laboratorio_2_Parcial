@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Clases", "Biblioteca\Clases
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Soto.Magali.Parcial", "Soto.Magali.Parcial\Soto.Magali.Parcial.csproj", "{04B3DE62-71FB-4143-8A08-7FD734E5FE8C}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pruebas", "Pruebas\Pruebas.csproj", "{655A23EA-B0B1-429B-B5FD-EF3CD9EAEFD4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{04B3DE62-71FB-4143-8A08-7FD734E5FE8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{04B3DE62-71FB-4143-8A08-7FD734E5FE8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{04B3DE62-71FB-4143-8A08-7FD734E5FE8C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{655A23EA-B0B1-429B-B5FD-EF3CD9EAEFD4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{655A23EA-B0B1-429B-B5FD-EF3CD9EAEFD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{655A23EA-B0B1-429B-B5FD-EF3CD9EAEFD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{655A23EA-B0B1-429B-B5FD-EF3CD9EAEFD4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

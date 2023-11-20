@@ -9,3 +9,4 @@ C:\Users\sotom\OneDrive\Escritorio\Soto.Magali.Parcial\Biblioteca\obj\Debug\net6
 C:\Users\sotom\OneDrive\Escritorio\Soto.Magali.Parcial\Biblioteca\obj\Debug\net6.0\refint\Clases.dll
 C:\Users\sotom\OneDrive\Escritorio\Soto.Magali.Parcial\Biblioteca\obj\Debug\net6.0\Clases.pdb
 C:\Users\sotom\OneDrive\Escritorio\Soto.Magali.Parcial\Biblioteca\obj\Debug\net6.0\ref\Clases.dll
+C:\Users\sotom\OneDrive\Escritorio\Soto.Magali.Parcial\Biblioteca\obj\Debug\net6.0\Clases.csproj.AssemblyReference.cache

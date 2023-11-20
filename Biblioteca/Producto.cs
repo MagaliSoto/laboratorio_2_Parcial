@@ -8,13 +8,20 @@
     public class Producto
     {
         public string Nombre { get;set;}
+        public int Cantidad { get;set;}
         public List<Mercaderia>? ListaMercaderias { get; set;}
+
+        public Producto(string nombre, int cantidad)
+        {
+            Nombre = nombre;
+            Cantidad = cantidad;
+        }
 
         /// <summary>
         /// Inicializa una instancia de Producto
         /// </summary>
         /// <param name="nombre">Nombre que se le asigna al objeto</param>
-        /// <param name="mercaderias">lista del objeto Mercaderia usadas
+        /// <param name="listaMercaderias">lista del objeto Mercaderia usadas
         /// para crear el producto</param>
         public Producto(string nombre, List<Mercaderia> listaMercaderias)
         {

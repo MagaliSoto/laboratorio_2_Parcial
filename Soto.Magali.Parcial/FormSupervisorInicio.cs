@@ -15,35 +15,40 @@ namespace Soto.Magali.Parcial
     /// <summary>
     /// Formulario para visualizar y gestionar el inicio del supervisor.
     /// </summary>
-    public partial class FormSupervisorInicio : Form
+    public partial class FormSupervisorInicio : FormBase
     {
         private FormLogin formLogin;
         private FormInventario formInventario;
 
         /// <summary>
-        /// Inicializa una nueva instancia de FormSupervisorInicio
+        /// Inicializa una nueva instancia de formSupervisorInicio
         /// </summary>
-        public FormSupervisorInicio(Inventario inventarioCompartido, FormLogin fromLogin)
+        public FormSupervisorInicio(FormLogin fromLogin,Inventario inventario)
         {
             InitializeComponent();
             this.formLogin = fromLogin;
-            formInventario = new(inventarioCompartido, this);
+            formInventario = new(this, inventario);
         }
 
         /// <summary>
         /// Manejador de eventos para el botón "Ver Operarios",
         /// muestra información de los operarios mediante un MessageBox.
         /// </summary>
-        private void ButtonVerOperarios_Click(object sender, EventArgs e)
+        private async void ButtonVerOperarios_Click(object sender, EventArgs e)
         {
-            string mensaje = Supervisor.VerInformacionOperarios(formLogin.listaOperarios);
+            Task<string> mensajeTask = Supervisor.VerInformacionOperarios();
+            string mensaje = await mensajeTask;
             MessageBox.Show(mensaje);
         }
 
         private void ButtonLineaDeProduccion_Click(object sender, EventArgs e)
         {
+            formLogin.formLineaDeProduccion.ActualizarConfiguracionesForm(formLogin.formLineaDeProduccion);
             formLogin.formLineaDeProduccion.Show();
             this.Hide();
+
+            this.DetenerTemporizador();
+            formLogin.formLineaDeProduccion.InicializarTemporizador();
         }
 
         /// <summary>
@@ -52,9 +57,13 @@ namespace Soto.Magali.Parcial
         /// </summary>
         private void ButtonVerStock_Click(object sender, EventArgs e)
         {
+            formInventario.ActualizarConfiguracionesForm(formInventario);
             formInventario.ActulizarCantidades();
             formInventario.Show();
             this.Hide();
+            
+            this.DetenerTemporizador();
+            formInventario.InicializarTemporizador();
         }
 
         private void ButtonSalir_Click(object sender, EventArgs e)

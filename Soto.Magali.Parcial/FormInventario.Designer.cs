@@ -312,7 +312,7 @@
             buttonAtras.UseVisualStyleBackColor = false;
             buttonAtras.Click += ButtonAtras_Click;
             // 
-            // FormInventario
+            // formInventario
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -342,9 +342,9 @@
             Controls.Add(labelCantidad);
             ForeColor = Color.Black;
             FormBorderStyle = FormBorderStyle.FixedToolWindow;
-            Name = "FormInventario";
+            Name = "formInventario";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "FormInventario";
+            Text = "formInventario";
             ResumeLayout(false);
         }
 
